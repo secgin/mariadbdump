@@ -121,7 +121,7 @@ class Mariadbdump extends InjectableAbstract
      */
     private function saveToFile(string $filePath): void
     {
-        $fileName = $this->db->getDbname() . '_ $' . date('YmdHis') . '.sql';
+        $fileName = $this->db->getDbname() . '_' . date('YmdHis') . '.sql';
         $filePath = rtrim($filePath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $fileName;
 
         $result = file_put_contents($filePath, $this->fullCode);
