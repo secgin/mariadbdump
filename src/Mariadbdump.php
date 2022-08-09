@@ -24,7 +24,7 @@ class Mariadbdump extends InjectableAbstract
         DependencyContainer::add('db', new Db(
             $options['database']['host'],
             $options['database']['dbname'],
-            $options['database']['user'],
+            $options['database']['username'],
             $options['database']['password']));
         DependencyContainer::add('dbSchema', new DbSchema());
     }
