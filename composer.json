@@ -1,5 +1,5 @@
 {
-    "name": "secgin/mysqldump",
+    "name": "secgin/mariadbdump",
     "description": "MariaDB database backup utility",
     "type": "library",
     "autoload": {
