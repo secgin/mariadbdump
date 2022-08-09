@@ -36,7 +36,7 @@ class DbSchema extends InjectableAbstract
             INFORMATION_SCHEMA.TABLES
         WHERE
             TABLE_SCHEMA='{$this->db->getDbname()}' AND
-            TABLE_TYPE='BASE TABLE' and TABLE_NAME ='bank_credit'
+            TABLE_TYPE='BASE TABLE'
         ORDER BY
             TABLE_NAME
         EOD;
