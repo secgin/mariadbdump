@@ -1,0 +1,19 @@
+{
+    "name": "secgin/mysqldump",
+    "description": "MariaDB database backup utility",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "YG\\Mariadbdump\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Seçgin",
+            "email": "secginsanli@gmail.com"
+        }
+    ],
+    "require": {
+      "ext-pdo": "*"
+    }
+}
