@@ -19,6 +19,8 @@ class Mariadbdump extends InjectableAbstract
         $procedureCode,
         $fullCode;
 
+    private string $scriptFile = '';
+
     public function __construct(array $options)
     {
         DependencyContainer::add('db', new Db(
@@ -29,10 +31,7 @@ class Mariadbdump extends InjectableAbstract
         DependencyContainer::add('dbSchema', new DbSchema());
     }
 
-    /**
-     * @throws Exception
-     */
-    public function dump(?string $filePath = null): string
+    public function dump(): string
     {
         $this->clear();
 
@@ -55,10 +54,21 @@ class Mariadbdump extends InjectableAbstract
             'code' => $code,
         ]);
 
-        if ($filePath)
-            $this->saveToFile($filePath);
-
         return $this->fullCode;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function dumpToSaveFile(string $filePath, ?string $fileName = null): void
+    {
+        $this->dump();
+        $this->saveToFile($filePath, $fileName);
+    }
+
+    public function getScriptFile(): string
+    {
+        return $this->scriptFile;
     }
 
     private function clear(): void
@@ -119,12 +129,14 @@ class Mariadbdump extends InjectableAbstract
     /**
      * @throws Exception
      */
-    private function saveToFile(string $filePath): void
+    private function saveToFile(string $filePath, ?string $fileName = null): void
     {
-        $fileName = $this->db->getDbname() . '_' . date('YmdHis') . '.sql';
-        $filePath = rtrim($filePath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $fileName;
+        if ($fileName == '')
+            $fileName=$this->db->getDbname() . '_' . date('YmdHis') . '.sql';
 
-        $result = file_put_contents($filePath, $this->fullCode);
+        $this->scriptFile = rtrim($filePath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $fileName;
+
+        $result = file_put_contents($this->scriptFile, $this->fullCode);
 
         if ($result === false)
             throw new SaveFileException('Can\'t save file');
