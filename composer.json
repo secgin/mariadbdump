@@ -2,6 +2,7 @@
     "name": "secgin/mariadbdump",
     "description": "MariaDB database backup utility",
     "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "YG\\Mariadbdump\\": "src/"
